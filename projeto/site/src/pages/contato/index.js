@@ -1,15 +1,10 @@
-import React from 'react'
-import { Cabecalho } from '../../components/cabecalho'
+import React from 'react';
+import { Cabecalho } from '../../components/cabecalho';
+import { ContatoForm } from './form';
 
-export function ContatoScreen() {
-  return (
-    <div>
-      <Cabecalho
-        titulo="Contato"
-        subtitulo="Entre em contato conosco"
-      />
-    </div>
-  )
-
-
-}
+export const ContatoScreen = _ => (
+  <div className="container">
+    <Cabecalho titulo="Contato" subtitulo="entre em contato conosco" />
+    <ContatoForm />
+  </div>
+);
