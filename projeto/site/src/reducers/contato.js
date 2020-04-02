@@ -6,7 +6,8 @@ const INITIAL_STATE = {
   email: '',
   assunto: '',
   msgSucesso: null,
-  msgErro: null
+  msgErro: null,
+  lista: []
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -18,6 +19,7 @@ export default (state = INITIAL_STATE, action) => {
     case 'CONTATO_LIMPAR_FORM': return INITIAL_STATE;
     case 'CONTATO_MSG_SUCESSO': return { ...state, msgSucesso: action.valor }
     case 'CONTATO_MSG_ERRO': return { ...state, msgErro: action.valor }
+    case 'CONTATO_LISTAR': return { ...state, lista: action.valor }
     default: return state;
   }
 }

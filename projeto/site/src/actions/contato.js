@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { limpar } from './curso';
 const URL = 'http://localhost:3200/api/contato';
 
 export const setData = e => ({
@@ -53,6 +54,45 @@ export const adicionar = (e, data, nome, email, assunto) => {
       return dispatch({
         type: 'CONTATO_MSG_ERRO',
         valor: 'Erro ao enviar contato, tente novamente'
+      });
+    }
+  }
+}
+
+export const listarContatos = () => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(URL);
+      return dispatch({
+        type: 'CONTATO_LISTAR',
+        valor: response.data
+      })
+    } catch (error) {
+      console.log(error)
+      return dispatch({
+        type: 'CONTATO_MSG_ERRO',
+        valor: 'Erro ao listar contatos, tente novamente'
+      });
+    }
+  }
+}
+
+export const contatoRespondido = _id => {
+  return async dispatch => {
+    try {
+      if (window.confirm('O Contato selecionado foi realmente respondido?')) {
+        await axios.delete(URL + '/' + _id)
+        dispatch(listarContatos());
+        return dispatch({
+          type: 'CONTATO_MSG_SUCESSO',
+          valor: 'Contato respondido com sucesso'
+        });
+      }
+    } catch (error) {
+      console.log(error)
+      return dispatch({
+        type: 'CONTATO_MSG_ERRO',
+        valor: 'Erro ao deletar contato, tente novamente'
       });
     }
   }

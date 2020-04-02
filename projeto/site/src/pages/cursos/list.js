@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {
+  listarCursos,
+  removerCurso,
+  editarCurso
+} from '../../actions/curso'
 
+const CursosLista = props => {
+  const { listarCursos, removerCurso, editarCurso } = props;
 
-
-export const CursosLista = props => {
+  useEffect(() => {
+    listarCursos();
+  }, [listarCursos]);
 
   const exibirLinhas = () => {
     const cursos = props.cursos || [];
@@ -13,12 +23,11 @@ export const CursosLista = props => {
         <td className="align-middle">{curso.descricao}</td>
         <td>
           <button className="btn btn-success mr-2"
-            onClick={() => props.editar(curso)}
-          >
+            onClick={() => editarCurso(curso)}>
             <i className="fa fa-check"></i>
           </button>
           <button className="btn btn-danger"
-            onClick={() => props.deletar(curso._id)}>
+            onClick={() => removerCurso(curso._id)}>
             <i className="fa fa-trash-o"></i>
           </button>
         </td>
@@ -44,3 +53,17 @@ export const CursosLista = props => {
     </div>
   )
 }
+
+const mapStoreToProps = store => ({
+  cursos: store.curso.lista
+});
+
+const mapActionsToProps = dispatch => bindActionCreators({
+  listarCursos,
+  removerCurso,
+  editarCurso
+}, dispatch);
+
+const conectado = connect(mapStoreToProps, mapActionsToProps)(CursosLista);
+
+export { conectado as CursosLista };

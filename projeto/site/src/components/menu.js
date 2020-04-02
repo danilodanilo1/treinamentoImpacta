@@ -1,29 +1,38 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export function Menu() {
-  return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="#">
-        ABC Courses
-        </a>
-      <button className="navbar-toggler" type="button"
-        data-toggle="collapse"
-        data-target="#navbarContent"
-        aria-controls="navbarContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarContent">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link className="nav-link" to="/cursos">Cursos</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/contato">Contato</Link>
-          </li>
-        </ul> </div>
-    </nav>
-  )
-}
+const Menu = props => (
+  <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <Link className="navbar-brand" to="/">
+      ABC Courses
+        </Link>
+    <button className="navbar-toggler" type="button"
+      data-toggle="collapse"
+      data-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse" id="navbarContent">
+      <ul className="navbar-nav mr-auto">
+        <li className="nav-item">
+          <Link className="nav-link" to="/cursos">Cursos ({props.total})</Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/contato">Contato</Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/responder">Responder</Link>
+        </li>
+      </ul> </div>
+  </nav>
+);
+
+const mapStoreToProps = store => ({
+  total: store.curso.lista.length || 0,
+})
+
+const conectado = connect(mapStoreToProps, null)(Menu);
+export { conectado as Menu };

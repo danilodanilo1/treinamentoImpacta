@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import CursosScreen from '../pages/cursos'
 import { ContatoScreen } from '../pages/contato'
+import { ResponderScreen } from '../pages/responder'
+
 
 
 
@@ -11,6 +13,7 @@ export default class Rotas extends Component {
       <Switch>
         <Route path='/cursos' component={CursosScreen} />
         <Route path='/contato' component={ContatoScreen} />
+        <Route path='/responder' component={ResponderScreen} />
         <Route path='*' component={CursosScreen} />
       </Switch>
     )

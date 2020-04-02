@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Cabecalho } from '../../components/cabecalho'
-import CursoCadastro from './cadastro'
+import { CursoCadastro } from './cadastro'
 
 export default class CursosScreen extends Component {
 

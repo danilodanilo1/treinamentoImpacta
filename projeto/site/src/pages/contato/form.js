@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
@@ -19,6 +19,10 @@ const ContatoForm = props => {
     msgErro, msgSucesso,
     limparForm, adicionar
   } = props;
+
+  useEffect(() => {
+    limparForm();
+  }, [limparForm])
 
   return (
     <div>

@@ -1,12 +1,21 @@
-import React, { Component } from 'react';
-import { CursoLista } from './list';
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {
+  setCodigo,
+  setDescricao,
+  setCargaHoraria,
+  setPreco,
+  setCategoria,
+  limpar,
+  adicionar
+} from '../../actions/curso'
 
-
-export default class CursoForm extends Component {
-
+class CursoForm extends React.Component {
 
   render() {
     const {
+      _id,
       codigo,
       setCodigo,
       descricao,
@@ -18,8 +27,7 @@ export default class CursoForm extends Component {
       categoria,
       setCategoria,
       limpar,
-      adicionar,
-      isAtualizacao
+      adicionar
     } = this.props;
 
     return (
@@ -88,8 +96,8 @@ export default class CursoForm extends Component {
           </div>
           <div className="form-group row">
             <button className="btn btn-primary ml-3 mb-3"
-              onClick={adicionar}>
-              {isAtualizacao ? 'Atualizar' : 'Adicionar'}
+              onClick={e => adicionar(e, _id, codigo, descricao, cargaHoraria, preco, categoria)}>
+              {_id && _id !== '' ? 'Atualizar' : 'Adicionar'}
             </button>
             <button className="btn btn-secondary ml-3 mb-3"
               onClick={limpar}>
@@ -101,3 +109,25 @@ export default class CursoForm extends Component {
     );
   }
 }
+
+const mapStoreToProps = store => ({
+  _id: store.curso._id,
+  codigo: store.curso.codigo,
+  descricao: store.curso.descricao,
+  cargaHoraria: store.curso.cargaHoraria,
+  preco: store.curso.preco,
+  categoria: store.curso.categoria,
+});
+
+const mapActionsToProps = dispatch => bindActionCreators({
+  setCodigo,
+  setDescricao,
+  setCargaHoraria,
+  setPreco,
+  setCategoria,
+  limpar,
+  adicionar
+}, dispatch);
+
+const conectado = connect(mapStoreToProps, mapActionsToProps)(CursoForm);
+export { conectado as CursoForm };
