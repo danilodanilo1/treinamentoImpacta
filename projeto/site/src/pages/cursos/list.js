@@ -16,6 +16,7 @@ const CursosLista = props => {
 
   const exibirLinhas = () => {
     const cursos = props.cursos || [];
+    console.log(cursos)
 
     return cursos.map(curso => (
       <tr key={curso._id}>

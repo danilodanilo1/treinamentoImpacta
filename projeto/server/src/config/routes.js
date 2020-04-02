@@ -12,4 +12,7 @@ module.exports = server => {
 
   const serviceCompromissos = require('../api/compromissos/service');
   serviceCompromissos.register(router, '/compromissos');
+
+  const serviceProfessores = require('../api/professores/service');
+  serviceProfessores.register(router, '/professores');
 }
